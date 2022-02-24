@@ -10,6 +10,10 @@ class RegisterPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
+    final nameController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -47,20 +51,23 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.04),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'Full Name',
-                icon: Icon(AntDesign.user),
+                icon: const Icon(AntDesign.user),
+                controller: nameController,
               ),
               SizedBox(height: height * 0.015),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'Email',
-                icon: Icon(Icons.email),
+                icon: const Icon(Icons.email),
+                controller: emailController,
               ),
               SizedBox(height: height * 0.015),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'Password',
                 obscureText: true,
-                icon: Icon(Icons.password),
+                icon: const Icon(Icons.password),
+                controller: passwordController,
               ),
               SizedBox(height: height * 0.01),
               Text(

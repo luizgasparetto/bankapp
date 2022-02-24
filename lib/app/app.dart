@@ -1,7 +1,7 @@
 import 'package:bankapp/app/modules/views/auth/login_page.dart';
 import 'package:bankapp/app/modules/views/auth/register_page.dart';
-import 'package:bankapp/app/modules/views/auth/welcome_page.dart';
 import 'package:bankapp/app/shared/core/exports.dart';
+import 'package:bankapp/app/shared/services/auth_wrapper.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
       title: 'BankApp',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme(),
-      initialRoute: '/welcome',
+      //initialRoute: '/welcome',
+      home: GetIt.I<AuthWrapper>().auth,
       routes: {
         '/home': (_) => const HomePage(),
         '/pix': (_) => const PixPage(),

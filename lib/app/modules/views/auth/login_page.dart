@@ -9,6 +9,9 @@ class LoginPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -16,11 +19,11 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: height * 0.1),
+                margin: EdgeInsets.only(top: height * 0.04),
                 alignment: Alignment.center,
                 child: SizedBox(
                   width: width * 0.7,
-                  child: Lottie.asset('assets/lottie/plane.json'),
+                  child: Lottie.asset('assets/lottie/login.json'),
                 ),
               ),
               SizedBox(height: height * 0.01),
@@ -46,17 +49,26 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.04),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'Email',
-                icon: Icon(Icons.email),
+                icon: const Icon(Icons.email),
+                controller: emailController,
               ),
               SizedBox(height: height * 0.015),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'Password',
                 obscureText: true,
-                icon: Icon(Icons.password),
+                icon: const Icon(Icons.password),
+                controller: passwordController,
               ),
-              SizedBox(height: height * 0.04),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text('Forgot your password?'),
+                ),
+              ),
+              SizedBox(height: height * 0.02),
               CustomButton(
                 text: 'Login',
                 color: Theme.of(context).primaryColor,

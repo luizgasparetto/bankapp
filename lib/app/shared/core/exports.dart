@@ -1,7 +1,6 @@
 export 'package:bankapp/app/modules/widgets/custom_action_card.dart';
 export 'package:bankapp/app/modules/widgets/custom_list_tile.dart';
 export 'package:flutter/material.dart';
-export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_vector_icons/flutter_vector_icons.dart';
 export 'package:bankapp/app/modules/views/utils/cards_page.dart';
 export 'package:bankapp/app/modules/views/utils/deposit_page.dart';
@@ -11,8 +10,7 @@ export 'package:bankapp/app/shared/core/themes.dart';
 export 'package:equatable/equatable.dart';
 export 'package:bankapp/app/shared/models/credit_card.dart';
 export 'package:get_it/get_it.dart';
-export 'package:bankapp/app/shared/repository/auth_repository.dart';
-export 'package:bankapp/app/shared/core/registery.dart';
+export 'package:bankapp/app/shared/services/get_it.dart';
 export 'package:bankapp/app/app.dart';
 export 'package:bankapp/app/shared/models/user.dart';
 export 'package:bankapp/app/modules/views/home/home_page.dart';
