@@ -1,3 +1,4 @@
+import 'package:bankapp/app/shared/models/criptocoin.dart';
 import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';

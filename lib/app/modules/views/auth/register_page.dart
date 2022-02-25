@@ -1,5 +1,4 @@
-import 'package:bankapp/app/shared/core/exports.dart';
-
+import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/custom_buttom.dart';
 
 class RegisterPage extends StatelessWidget {

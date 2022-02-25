@@ -1,5 +1,8 @@
 import 'package:bankapp/app/modules/widgets/custom_buttom.dart';
-import 'package:bankapp/app/shared/core/exports.dart';
+import 'package:bankapp/app/modules/widgets/custom_text_field.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);

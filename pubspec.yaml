@@ -46,8 +46,9 @@ dependencies:
   flutter_bloc: ^8.0.1
   flip_card: ^0.6.0
   flutter_svg: ^1.0.3
-  dio: ^4.0.4
   http: ^0.13.4
+  intl: ^0.17.0
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,10 +2,11 @@
 
 import 'dart:convert';
 
+import 'package:bankapp/app/shared/models/criptocoin.dart';
 import 'package:http/http.dart';
 
 abstract class ICriptoCoinRepository {
-  Future<List<dynamic>> getCoins();
+  Future<List<CriptoCoin>> getCoins();
 }
 
 class CriptoCoinRepository implements ICriptoCoinRepository {
@@ -15,10 +16,11 @@ class CriptoCoinRepository implements ICriptoCoinRepository {
   const CriptoCoinRepository(Client client) : _client = client;
 
   @override
-  Future<List<dynamic>> getCoins() async {
+  Future<List<CriptoCoin>> getCoins() async {
     final response = await _client.get(Uri.parse(API_URL));
     Map<String, dynamic> map = json.decode(response.body);
-    return map['data'];
+    final dataList = map['data'] as List;
+    return dataList.map((coin) => CriptoCoin.fromMap(coin)).toList();
     //return list.map((coin) => Coin.fromMap(coin)).toList();
   }
 }

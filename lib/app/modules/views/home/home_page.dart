@@ -1,4 +1,7 @@
-import 'package:bankapp/app/shared/core/exports.dart';
+import 'package:bankapp/app/modules/widgets/custom_action_card.dart';
+import 'package:bankapp/app/modules/widgets/custom_list_tile.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,7 +32,7 @@ class HomePage extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: height * 0.035, right: height * 0.03),
             child: Text(
-              'Bom dia,\nAline',
+              'Bom dia,\nLuiz',
               style: TextStyle(
                 fontSize: MediaQuery.of(context).textScaleFactor * 40,
                 fontWeight: FontWeight.bold,
@@ -75,7 +78,7 @@ class HomePage extends StatelessWidget {
                   ActionCard(
                     icon: Icons.receipt,
                     text: 'Consultar\nExtrato',
-                    onTap: () => Navigator.pushNamed(context, '/extract'),
+                    onTap: () => Navigator.pushNamed(context, '/teste'),
                   ),
                   ActionCard(
                     icon: MaterialCommunityIcons.currency_usd,

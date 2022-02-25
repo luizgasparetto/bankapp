@@ -1,4 +1,5 @@
-import 'package:bankapp/app/shared/core/exports.dart';
+import 'package:bankapp/app/modules/views/auth/welcome_page.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

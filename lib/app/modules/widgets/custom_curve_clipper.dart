@@ -1,4 +1,4 @@
-import '../../shared/core/exports.dart';
+import 'package:bankapp/app/core/exports.dart';
 
 class CustomCurveClipper extends CustomClipper<Path> {
   @override

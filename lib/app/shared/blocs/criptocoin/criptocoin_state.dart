@@ -10,7 +10,7 @@ abstract class CriptoCoinState extends Equatable {
 class CriptoCoinLoadingState extends CriptoCoinState {}
 
 class CriptoCoinLoadedState extends CriptoCoinState {
-  final List<dynamic> coinList;
+  final List<CriptoCoin> coinList;
 
   const CriptoCoinLoadedState(this.coinList);
 

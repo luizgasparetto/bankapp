@@ -1,6 +1,7 @@
+import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/creditcard/custom_credit_card_back.dart';
 import 'package:bankapp/app/modules/widgets/creditcard/custom_credit_card_front.dart';
-import 'package:bankapp/app/shared/core/exports.dart';
+
 import 'package:flip_card/flip_card.dart';
 
 class CardsPage extends StatelessWidget {

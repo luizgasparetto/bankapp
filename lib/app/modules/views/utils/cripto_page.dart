@@ -1,5 +1,7 @@
+import 'package:bankapp/app/core/exports.dart';
+import 'package:bankapp/app/modules/widgets/shimmer/skeleton_list_view.dart';
 import 'package:bankapp/app/shared/blocs/criptocoin/criptocoin_bloc.dart';
-import 'package:bankapp/app/shared/core/exports.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CriptoPage extends StatelessWidget {
@@ -17,22 +19,24 @@ class CriptoPage extends StatelessWidget {
       body: BlocBuilder<CriptoCoinBloc, CriptoCoinState>(
         builder: ((context, state) {
           if (state is CriptoCoinLoadingState) {
-            return const Center(child: CircularProgressIndicator());
+            return const SkeletonListView();
           } else if (state is CriptoCoinLoadedState) {
             final coinList = state.coinList;
 
             return ListView.separated(
               itemCount: coinList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Image.network(coinList[index]['image_url']),
-                  title: Text(coinList[index]['name']),
-                  subtitle: Text(coinList[index]['symbol']),
-                  trailing: Text(
-                    double.parse(
-                            coinList[index]['latest_price']['amount']['amount'])
-                        .toStringAsFixed(2),
-                  ),
+                return Column(
+                  children: [
+                    ListTile(
+                      leading: Image.network(coinList[index].imgUrl),
+                      title: Text(coinList[index].name),
+                      subtitle: Text(coinList[index].symbol),
+                      trailing: Text(
+                        "R\$ ${double.parse(coinList[index].latestPrice).toStringAsFixed(2)}",
+                      ),
+                    ),
+                  ],
                 );
               },
               separatorBuilder: (context, index) => const Divider(),

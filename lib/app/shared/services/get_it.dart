@@ -1,5 +1,6 @@
 // ignore_for_file: override_on_non_overriding_member
-import 'package:bankapp/app/shared/core/exports.dart';
+
+import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
 import 'package:bankapp/app/shared/services/auth_wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';

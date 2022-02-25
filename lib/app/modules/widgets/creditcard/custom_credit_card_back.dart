@@ -1,4 +1,4 @@
-import 'package:bankapp/app/shared/core/exports.dart';
+import 'package:bankapp/app/core/exports.dart';
 
 class CustomCreditCardBack extends StatelessWidget {
   const CustomCreditCardBack({Key? key}) : super(key: key);

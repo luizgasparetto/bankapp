@@ -6,7 +6,6 @@ export 'package:bankapp/app/modules/views/utils/cards_page.dart';
 export 'package:bankapp/app/modules/views/utils/deposit_page.dart';
 export 'package:bankapp/app/modules/views/utils/extract_page.dart';
 export 'package:bankapp/app/modules/views/utils/user_page.dart';
-export 'package:bankapp/app/shared/core/themes.dart';
 export 'package:equatable/equatable.dart';
 export 'package:bankapp/app/shared/models/credit_card.dart';
 export 'package:get_it/get_it.dart';

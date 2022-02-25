@@ -1,4 +1,4 @@
-import 'package:bankapp/app/shared/core/exports.dart';
+import 'package:bankapp/app/core/exports.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomCreditCardFront extends StatelessWidget {
@@ -35,7 +35,7 @@ class CustomCreditCardFront extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(right: width * 0.02, bottom: height * 0.01),
             child: Align(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.topRight,
               child: SizedBox(
                 width: width * 0.2,
                 height: height * 0.08,
@@ -45,11 +45,12 @@ class CustomCreditCardFront extends StatelessWidget {
           ),
           Container(
             margin:
-                EdgeInsets.only(right: width * 0.37, bottom: height * 0.035),
+                EdgeInsets.only(right: width * 0.23, bottom: height * 0.035),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Text(
-                'JOAO P. SILVA',
+                'LUIZ E. GASPARETTO',
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).textScaleFactor * 14,
@@ -59,7 +60,7 @@ class CustomCreditCardFront extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: width * 0.3, bottom: height * 0.035),
+            padding: EdgeInsets.only(left: width * 0.6, bottom: height * 0.035),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Text(

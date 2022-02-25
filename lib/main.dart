@@ -1,4 +1,4 @@
-import 'package:bankapp/app/shared/core/exports.dart';
+import 'package:bankapp/app/core/exports.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
