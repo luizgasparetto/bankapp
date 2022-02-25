@@ -17,5 +17,8 @@ class Registery implements IRegistery {
     GetIt.I.registerSingleton<AuthWrapper>(
       AuthWrapper(GetIt.I<AuthRepository>()),
     );
+    // GetIt.I.registerSingleton<CriptoCoinBloc>(CriptoCoinBloc(
+    //   CriptoCoinRepository(Dio()),
+    // ));
   }
 }

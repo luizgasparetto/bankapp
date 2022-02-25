@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 abstract class IAuthRepository {
-  Future signIn(String email, String password);
-  Future signUp(String email, String password);
-  Future signOut();
+  void signIn(String email, String password);
+  void signUp(String email, String password);
+  void signOut();
   void getUser();
 }
 
@@ -21,7 +21,7 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
   }
 
   @override
-  Future signIn(String email, String password) async {
+  void signIn(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       notifyListeners();
@@ -38,7 +38,7 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
   }
 
   @override
-  Future signUp(String email, String password) async {
+  void signUp(String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -61,7 +61,7 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
   }
 
   @override
-  Future signOut() async => await _auth.signOut();
+  void signOut() async => await _auth.signOut();
 
   @override
   void getUser() {

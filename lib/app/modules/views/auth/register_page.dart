@@ -21,7 +21,7 @@ class RegisterPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: height * 0.1),
+                margin: EdgeInsets.only(top: height * 0.09),
                 alignment: Alignment.center,
                 child: SizedBox(
                   width: width * 0.7,

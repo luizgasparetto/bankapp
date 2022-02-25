@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
               key: Key('toPayTile'),
             ),
           ),
-          SizedBox(height: height * 0.13),
+          SizedBox(height: height * 0.11),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(bottom: height * 0.05),
@@ -63,20 +63,19 @@ class HomePage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 children: [
                   ActionCard(
-                    icon: Icons.pix,
-                    text: 'Pix\n',
-                    onTap: () => Navigator.pushNamed(context, '/pix'),
-                    key: const Key('pixCard'),
+                    icon: Icons.payment,
+                    text: 'Meus\nCartões',
+                    onTap: () => Navigator.pushNamed(context, '/cards'),
+                  ),
+                  ActionCard(
+                    icon: MaterialCommunityIcons.ethereum,
+                    text: 'Cripto\nStore',
+                    onTap: () => Navigator.pushNamed(context, '/cripto'),
                   ),
                   ActionCard(
                     icon: Icons.receipt,
                     text: 'Consultar\nExtrato',
                     onTap: () => Navigator.pushNamed(context, '/extract'),
-                  ),
-                  ActionCard(
-                    icon: Icons.payment,
-                    text: 'Meus\nCartões',
-                    onTap: () => Navigator.pushNamed(context, '/cards'),
                   ),
                   ActionCard(
                     icon: MaterialCommunityIcons.currency_usd,
