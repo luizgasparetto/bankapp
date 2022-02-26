@@ -2,18 +2,23 @@
 
 import 'dart:convert';
 
+import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/models/criptocoin.dart';
 import 'package:http/http.dart';
 
 abstract class ICriptoCoinRepository {
   Future<List<CriptoCoin>> getCoins();
+  String setCurrentQuantity(double quantity);
+  void setDefaultQuantity();
 }
 
-class CriptoCoinRepository implements ICriptoCoinRepository {
+class CriptoCoinRepository extends ChangeNotifier
+    implements ICriptoCoinRepository {
   final Client _client;
   final API_URL = 'https://api.coinbase.com/v2/assets/search?base=BRL';
+  double currentQuantity = 0;
 
-  const CriptoCoinRepository(Client client) : _client = client;
+  CriptoCoinRepository(Client client) : _client = client;
 
   @override
   Future<List<CriptoCoin>> getCoins() async {
@@ -22,5 +27,18 @@ class CriptoCoinRepository implements ICriptoCoinRepository {
     final dataList = map['data'] as List;
     return dataList.map((coin) => CriptoCoin.fromMap(coin)).toList();
     //return list.map((coin) => Coin.fromMap(coin)).toList();
+  }
+
+  @override
+  String setCurrentQuantity(double quantity) {
+    currentQuantity = quantity;
+    notifyListeners();
+    return currentQuantity.toString();
+  }
+
+  @override
+  void setDefaultQuantity() {
+    currentQuantity = 0;
+    notifyListeners();
   }
 }

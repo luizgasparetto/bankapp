@@ -10,7 +10,7 @@ class SkeletonListView extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return ListView.separated(
-      itemCount: 8,
+      itemCount: 25,
       itemBuilder: (context, index) {
         return Stack(
           children: [
@@ -19,9 +19,9 @@ class SkeletonListView extends StatelessWidget {
               child: Skeleton(
                 child: Container(
                   height: height * 0.09,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
+                    color: Colors.grey.shade200,
                   ),
                 ),
               ),
@@ -33,7 +33,7 @@ class SkeletonListView extends StatelessWidget {
                   height: height * 0.025,
                   width: width * 0.5,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -46,7 +46,7 @@ class SkeletonListView extends StatelessWidget {
                   height: height * 0.015,
                   width: width * 0.3,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -59,7 +59,7 @@ class SkeletonListView extends StatelessWidget {
                   height: height * 0.015,
                   width: width * 0.2,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),

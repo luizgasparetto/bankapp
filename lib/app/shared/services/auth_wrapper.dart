@@ -1,7 +1,6 @@
 import 'package:bankapp/app/modules/views/auth/welcome_page.dart';
 import 'package:bankapp/app/modules/views/home/home_page.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 abstract class IAuthWrapper {
@@ -9,10 +8,11 @@ abstract class IAuthWrapper {
 }
 
 class AuthWrapper implements IAuthWrapper {
-  final User? _user;
+  final AuthRepository authRepository;
 
-  AuthWrapper(AuthRepository authRepository) : _user = authRepository.authUser;
+  AuthWrapper(this.authRepository);
 
   @override
-  Widget get auth => _user != null ? const HomePage() : const WelcomePage();
+  Widget get auth =>
+      authRepository.authUser != null ? const HomePage() : const WelcomePage();
 }

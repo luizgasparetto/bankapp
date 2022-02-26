@@ -1,7 +1,7 @@
-import 'package:bankapp/app/modules/widgets/custom_action_card.dart';
-import 'package:bankapp/app/modules/widgets/custom_list_tile.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:bankapp/app/core/exports.dart';
+import 'package:bankapp/app/shared/repositories/auth_repository.dart';
+
+import 'dart:developer' as dev;
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,8 +24,10 @@ class HomePage extends StatelessWidget {
                 color: Colors.black,
                 size: height * 0.045,
               ),
-              onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                  context, '/login', (route) => false),
+              onPressed: () async {
+                await GetIt.I<AuthRepository>().signOut();
+                Navigator.pushReplacementNamed(context, '/login');
+              },
             ),
           ),
           SizedBox(height: height * 0.03), // height * 0.03
@@ -42,10 +44,14 @@ class HomePage extends StatelessWidget {
           SizedBox(height: height * 0.1),
           Container(
             margin: EdgeInsets.only(left: height * 0.03, right: height * 0.03),
-            child: const CustomListTile(
+            child: CustomListTile(
               title: 'Saldo em Conta',
               subtitle: 'R\$ 2.248,55',
-              key: Key('saldoTile'),
+              key: const Key('saldoTile'),
+              onPressedFunction: () {
+                final currentUser = GetIt.I<AuthRepository>().authUser;
+                dev.log(currentUser.toString());
+              },
             ),
           ),
           SizedBox(height: height * 0.02),
@@ -78,7 +84,7 @@ class HomePage extends StatelessWidget {
                   ActionCard(
                     icon: Icons.receipt,
                     text: 'Consultar\nExtrato',
-                    onTap: () => Navigator.pushNamed(context, '/teste'),
+                    onTap: () => Navigator.pushNamed(context, '/extract'),
                   ),
                   ActionCard(
                     icon: MaterialCommunityIcons.currency_usd,

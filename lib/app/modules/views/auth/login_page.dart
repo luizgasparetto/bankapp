@@ -1,8 +1,8 @@
+import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/custom_buttom.dart';
-import 'package:bankapp/app/modules/widgets/custom_text_field.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
+import 'package:bankapp/app/shared/repositories/auth_repository.dart';
+
+import 'dart:developer' as dev;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,9 +11,6 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -55,20 +52,23 @@ class LoginPage extends StatelessWidget {
               CustomTextField(
                 hintText: 'Email',
                 icon: const Icon(Icons.email),
-                controller: emailController,
+                onChangedFunction: GetIt.I<AuthRepository>().updateEmail,
               ),
               SizedBox(height: height * 0.015),
               CustomTextField(
                 hintText: 'Password',
                 obscureText: true,
                 icon: const Icon(Icons.password),
-                controller: passwordController,
+                onChangedFunction: GetIt.I<AuthRepository>().updatePassword,
               ),
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
                   child: const Text('Forgot your password?'),
+                  onPressed: () {
+                    final currentUser = GetIt.I<AuthRepository>().authUser;
+                    dev.log(currentUser.toString());
+                  },
                 ),
               ),
               SizedBox(height: height * 0.02),
@@ -77,8 +77,17 @@ class LoginPage extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 fontSize: 18,
-                onPressedFunction: () =>
-                    Navigator.pushReplacementNamed(context, '/home'),
+                onPressedFunction: () async {
+                  try {
+                    await GetIt.I<AuthRepository>().signIn();
+                    Navigator.pushReplacementNamed(context, '/home');
+                    await GetIt.I<AuthRepository>().resetPasswordAndEmail();
+                  } on AuthException catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(e.message),
+                    ));
+                  }
+                },
               ),
               SizedBox(height: height * 0.01),
               Row(

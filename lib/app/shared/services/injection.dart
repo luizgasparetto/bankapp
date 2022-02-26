@@ -2,8 +2,10 @@
 
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
+import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
 import 'package:bankapp/app/shared/services/auth_wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart';
 
 abstract class IRegistery {
   static void setUp() {}
@@ -18,8 +20,8 @@ class Registery implements IRegistery {
     GetIt.I.registerSingleton<AuthWrapper>(
       AuthWrapper(GetIt.I<AuthRepository>()),
     );
-    // GetIt.I.registerSingleton<CriptoCoinBloc>(CriptoCoinBloc(
-    //   CriptoCoinRepository(Dio()),
-    // ));
+    GetIt.I.registerSingleton<CriptoCoinRepository>(
+      CriptoCoinRepository(Client()),
+    );
   }
 }

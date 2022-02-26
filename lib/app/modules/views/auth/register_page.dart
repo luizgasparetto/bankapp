@@ -1,6 +1,8 @@
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/custom_buttom.dart';
 
+import '../../../shared/repositories/auth_repository.dart';
+
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
@@ -8,10 +10,6 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-
-    final nameController = TextEditingController();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -50,27 +48,26 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.04),
-              CustomTextField(
+              const CustomTextField(
                 hintText: 'Full Name',
-                icon: const Icon(AntDesign.user),
-                controller: nameController,
+                icon: Icon(AntDesign.user),
               ),
               SizedBox(height: height * 0.015),
               CustomTextField(
                 hintText: 'Email',
                 icon: const Icon(Icons.email),
-                controller: emailController,
+                onChangedFunction: GetIt.I<AuthRepository>().updateEmail,
               ),
               SizedBox(height: height * 0.015),
               CustomTextField(
                 hintText: 'Password',
                 obscureText: true,
                 icon: const Icon(Icons.password),
-                controller: passwordController,
+                onChangedFunction: GetIt.I<AuthRepository>().updatePassword,
               ),
               SizedBox(height: height * 0.01),
               Text(
-                "Creatin an account means you agree to all terms and conditions of our services",
+                "Creating an account means you agree to all terms and conditions of our services",
                 style: GoogleFonts.roboto(
                   color: Theme.of(context).dialogBackgroundColor,
                   fontSize: MediaQuery.of(context).textScaleFactor * 13,
@@ -79,13 +76,21 @@ class RegisterPage extends StatelessWidget {
               ),
               SizedBox(height: height * 0.02),
               CustomButton(
-                text: 'Register',
-                color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
-                fontSize: MediaQuery.of(context).textScaleFactor * 18,
-                onPressedFunction: () =>
-                    Navigator.pushReplacementNamed(context, '/home'),
-              ),
+                  text: 'Register',
+                  color: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
+                  fontSize: MediaQuery.of(context).textScaleFactor * 18,
+                  onPressedFunction: () async {
+                    try {
+                      await GetIt.I<AuthRepository>().signUp();
+                      Navigator.pushReplacementNamed(context, '/home');
+                      await GetIt.I<AuthRepository>().resetPasswordAndEmail();
+                    } on AuthException catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(e.message),
+                      ));
+                    }
+                  }),
               SizedBox(height: height * 0.01),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

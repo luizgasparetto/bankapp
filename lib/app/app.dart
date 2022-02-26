@@ -5,6 +5,7 @@ import 'package:bankapp/app/modules/views/auth/register_page.dart';
 import 'package:bankapp/app/modules/views/utils/cripto_page.dart';
 import 'package:bankapp/app/shared/blocs/criptocoin/criptocoin_bloc.dart';
 import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
+import 'package:bankapp/app/shared/services/auth_wrapper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.theme(),
         //initialRoute: '/welcome',
-        home: const HomePage(), // GetIt.I<AuthWrapper>().auth
+        home: GetIt.I<AuthWrapper>().auth,
         routes: {
           '/home': (_) => const HomePage(),
           '/pix': (_) => const PixPage(),

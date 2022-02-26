@@ -2,10 +2,11 @@ import 'package:bankapp/app/core/exports.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
-  final Function(String)? onChangedFunction;
+  final void Function(String)? onChangedFunction;
   final bool obscureText;
   final Icon icon;
-  final TextEditingController controller;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
 
   const CustomTextField({
     Key? key,
@@ -13,7 +14,8 @@ class CustomTextField extends StatelessWidget {
     this.onChangedFunction,
     this.obscureText = false,
     required this.icon,
-    required this.controller,
+    this.controller,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class CustomTextField extends StatelessWidget {
       ),
       obscureText: obscureText,
       onChanged: onChangedFunction ?? (String text) {},
+      keyboardType: keyboardType ?? TextInputType.text,
     );
   }
 }
