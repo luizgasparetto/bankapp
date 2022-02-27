@@ -10,7 +10,7 @@ export 'package:equatable/equatable.dart';
 export 'package:bankapp/app/shared/models/credit_card.dart';
 export 'package:get_it/get_it.dart';
 export 'package:bankapp/app/shared/services/injection.dart';
-export 'package:bankapp/app/app.dart';
+export 'package:bankapp/app/myapp.dart';
 export 'package:bankapp/app/shared/models/user.dart';
 export 'package:bankapp/app/modules/views/home/home_page.dart';
 export 'package:bankapp/app/modules/views/utils/pix_page.dart';

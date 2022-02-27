@@ -1,7 +1,7 @@
+import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/models/criptocoin.dart';
 import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'dart:developer' as dev;
 
 part 'criptocoin_event.dart';
@@ -16,6 +16,7 @@ class CriptoCoinBloc extends Bloc<CriptoCoinEvent, CriptoCoinState> {
     on<CriptoCoinFetchedEvent>((event, emit) async {
       try {
         final coinList = await _criptoCoinRepository.getCoins();
+        GetIt.I<CriptoCoinRepository>().setCriptoCoinList(coinList);
         emit(CriptoCoinLoadedState(coinList));
       } catch (e, st) {
         emit(CriptoCoinErrorState());

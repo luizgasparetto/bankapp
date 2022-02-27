@@ -10,6 +10,7 @@ class SkeletonListView extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return ListView.separated(
+      shrinkWrap: true,
       itemCount: 25,
       itemBuilder: (context, index) {
         return Stack(

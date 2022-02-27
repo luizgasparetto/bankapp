@@ -10,19 +10,19 @@ class AuthException implements Exception {
 }
 
 abstract class IAuthRepository {
-  signIn();
-  signUp();
-  signOut();
+  Future<void> signIn();
+  Future<void> signUp();
+  Future<void> signOut();
   _getUser();
-  void updateEmail(String value);
-  void updatePassword(String value);
   resetPasswordAndEmail();
+  deleteAccount();
 }
 
 class AuthRepository extends ChangeNotifier implements IAuthRepository {
   final FirebaseAuth _auth;
   User? authUser;
 
+  String name = '';
   String email = '';
   String password = '';
 
@@ -34,7 +34,7 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
   }
 
   @override
-  signIn() async {
+  Future<void> signIn() async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       _getUser();
@@ -48,7 +48,7 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
   }
 
   @override
-  signUp() async {
+  Future<void> signUp() async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -67,8 +67,14 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
   }
 
   @override
-  signOut() async {
+  Future<void> signOut() async {
     await _auth.signOut();
+    _getUser();
+  }
+
+  @override
+  deleteAccount() async {
+    await _auth.currentUser!.delete();
     _getUser();
   }
 
@@ -78,15 +84,18 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
     notifyListeners();
   }
 
-  @override
   void updateEmail(String value) {
     email = value;
     notifyListeners();
   }
 
-  @override
   void updatePassword(String value) {
     password = value;
+    notifyListeners();
+  }
+
+  void updateName(String value) {
+    name = value;
     notifyListeners();
   }
 

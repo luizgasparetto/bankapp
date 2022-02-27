@@ -24,4 +24,18 @@ class CriptoCoin extends Equatable {
 
   @override
   List<Object?> get props => [name, symbol, imgUrl, latestPrice];
+
+  CriptoCoin copyWith({
+    String? name,
+    String? symbol,
+    String? imgUrl,
+    String? latestPrice,
+  }) {
+    return CriptoCoin(
+      name: name ?? this.name,
+      symbol: symbol ?? this.symbol,
+      imgUrl: imgUrl ?? this.imgUrl,
+      latestPrice: latestPrice ?? this.latestPrice,
+    );
+  }
 }

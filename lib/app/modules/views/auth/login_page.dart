@@ -4,6 +4,8 @@ import 'package:bankapp/app/shared/repositories/auth_repository.dart';
 
 import 'dart:developer' as dev;
 
+import 'package:bankapp/app/shared/repositories/user_repository.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -77,17 +79,8 @@ class LoginPage extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 fontSize: 18,
-                onPressedFunction: () async {
-                  try {
-                    await GetIt.I<AuthRepository>().signIn();
-                    Navigator.pushReplacementNamed(context, '/home');
-                    await GetIt.I<AuthRepository>().resetPasswordAndEmail();
-                  } on AuthException catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(e.message),
-                    ));
-                  }
-                },
+                onPressedFunction: () async =>
+                    await GetIt.I<UserRepository>().signIn(context),
               ),
               SizedBox(height: height * 0.01),
               Row(

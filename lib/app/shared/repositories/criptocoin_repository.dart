@@ -10,6 +10,8 @@ abstract class ICriptoCoinRepository {
   Future<List<CriptoCoin>> getCoins();
   String setCurrentQuantity(double quantity);
   void setDefaultQuantity();
+  void setCriptoCoinList(List<CriptoCoin> list);
+  void onChanged(String value);
 }
 
 class CriptoCoinRepository extends ChangeNotifier
@@ -17,6 +19,8 @@ class CriptoCoinRepository extends ChangeNotifier
   final Client _client;
   final API_URL = 'https://api.coinbase.com/v2/assets/search?base=BRL';
   double currentQuantity = 0;
+
+  List<CriptoCoin> criptoCoinList = [];
 
   CriptoCoinRepository(Client client) : _client = client;
 
@@ -26,7 +30,6 @@ class CriptoCoinRepository extends ChangeNotifier
     Map<String, dynamic> map = json.decode(response.body);
     final dataList = map['data'] as List;
     return dataList.map((coin) => CriptoCoin.fromMap(coin)).toList();
-    //return list.map((coin) => Coin.fromMap(coin)).toList();
   }
 
   @override
@@ -39,6 +42,22 @@ class CriptoCoinRepository extends ChangeNotifier
   @override
   void setDefaultQuantity() {
     currentQuantity = 0;
+    notifyListeners();
+  }
+
+  @override
+  void setCriptoCoinList(List<CriptoCoin> list) {
+    criptoCoinList = list;
+    notifyListeners();
+  }
+
+  @override
+  void onChanged(String value) {
+    List<CriptoCoin> coinList = criptoCoinList.where((element) {
+      return element.toString().toLowerCase().contains(value.toLowerCase());
+    }).toList();
+
+    criptoCoinList = coinList;
     notifyListeners();
   }
 }

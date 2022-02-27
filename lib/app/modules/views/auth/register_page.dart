@@ -1,5 +1,6 @@
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/custom_buttom.dart';
+import 'package:bankapp/app/shared/repositories/user_repository.dart';
 
 import '../../../shared/repositories/auth_repository.dart';
 
@@ -48,9 +49,10 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: height * 0.04),
-              const CustomTextField(
+              CustomTextField(
                 hintText: 'Full Name',
-                icon: Icon(AntDesign.user),
+                icon: const Icon(AntDesign.user),
+                onChangedFunction: GetIt.I<AuthRepository>().updateName,
               ),
               SizedBox(height: height * 0.015),
               CustomTextField(
@@ -76,21 +78,13 @@ class RegisterPage extends StatelessWidget {
               ),
               SizedBox(height: height * 0.02),
               CustomButton(
-                  text: 'Register',
-                  color: Theme.of(context).primaryColor,
-                  textColor: Colors.white,
-                  fontSize: MediaQuery.of(context).textScaleFactor * 18,
-                  onPressedFunction: () async {
-                    try {
-                      await GetIt.I<AuthRepository>().signUp();
-                      Navigator.pushReplacementNamed(context, '/home');
-                      await GetIt.I<AuthRepository>().resetPasswordAndEmail();
-                    } on AuthException catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(e.message),
-                      ));
-                    }
-                  }),
+                text: 'Register',
+                color: Theme.of(context).primaryColor,
+                textColor: Colors.white,
+                fontSize: MediaQuery.of(context).textScaleFactor * 18,
+                onPressedFunction: () async =>
+                    await GetIt.I<UserRepository>().signUp(context),
+              ),
               SizedBox(height: height * 0.01),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

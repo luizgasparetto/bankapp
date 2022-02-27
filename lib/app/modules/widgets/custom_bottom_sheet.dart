@@ -17,8 +17,8 @@ class CustomBottomSheet extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: height * 0.05),
+          SizedBox(
+            //margin: EdgeInsets.only(top: height * 0.01),
             height: height * 0.15,
             child: Image.network(coin.imgUrl),
           ),
@@ -34,13 +34,14 @@ class CustomBottomSheet extends StatelessWidget {
           Text(Formatter.numberFormat(double.parse(coin.latestPrice))),
           SizedBox(height: height * 0.03),
           CustomTextField(
-              hintText: 'Quantity',
-              icon: const Icon(MaterialCommunityIcons.currency_usd),
-              keyboardType: TextInputType.number,
-              onChangedFunction: (value) => value.isNotEmpty
-                  ? GetIt.I<CriptoCoinRepository>()
-                      .setCurrentQuantity(double.parse(value))
-                  : GetIt.I<CriptoCoinRepository>().setCurrentQuantity(0)),
+            hintText: 'Quantity',
+            icon: const Icon(MaterialCommunityIcons.currency_usd),
+            keyboardType: TextInputType.number,
+            onChangedFunction: (value) => value.isNotEmpty
+                ? GetIt.I<CriptoCoinRepository>()
+                    .setCurrentQuantity(double.parse(value))
+                : GetIt.I<CriptoCoinRepository>().setCurrentQuantity(0),
+          ),
           SizedBox(height: height * 0.01),
           Text(
             (GetIt.I<CriptoCoinRepository>().currentQuantity /

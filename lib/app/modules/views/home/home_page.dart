@@ -1,5 +1,6 @@
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
+import 'package:bankapp/app/shared/repositories/user_repository.dart';
 
 import 'dart:developer' as dev;
 
@@ -24,21 +25,23 @@ class HomePage extends StatelessWidget {
                 color: Colors.black,
                 size: height * 0.045,
               ),
-              onPressed: () async {
-                await GetIt.I<AuthRepository>().signOut();
-                Navigator.pushReplacementNamed(context, '/login');
-              },
+              onPressed: () => Navigator.pushNamed(context, '/user'),
             ),
           ),
           SizedBox(height: height * 0.03), // height * 0.03
           Container(
             margin: EdgeInsets.only(left: height * 0.035, right: height * 0.03),
-            child: Text(
-              'Bom dia,\nLuiz',
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).textScaleFactor * 40,
-                fontWeight: FontWeight.bold,
-              ),
+            child: FutureBuilder<String?>(
+              future: GetIt.I<UserRepository>().getName(),
+              builder: (context, snapshot) {
+                return Text(
+                  'Bom dia,\n${snapshot.data ?? ''}',
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).textScaleFactor * 40,
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(height: height * 0.1),
@@ -49,8 +52,7 @@ class HomePage extends StatelessWidget {
               subtitle: 'R\$ 2.248,55',
               key: const Key('saldoTile'),
               onPressedFunction: () {
-                final currentUser = GetIt.I<AuthRepository>().authUser;
-                dev.log(currentUser.toString());
+                dev.log(GetIt.I<AuthRepository>().authUser.toString());
               },
             ),
           ),
