@@ -1,8 +1,9 @@
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
-import 'package:bankapp/app/shared/repositories/user_repository.dart';
 
 import 'dart:developer' as dev;
+
+import 'package:bankapp/app/shared/services/implementation.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,10 +33,10 @@ class HomePage extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: height * 0.035, right: height * 0.03),
             child: FutureBuilder<String?>(
-              future: GetIt.I<UserRepository>().getName(),
+              future: GetIt.I<Implementation>().getName(),
               builder: (context, snapshot) {
                 return Text(
-                  'Bom dia,\n${snapshot.data ?? ''}',
+                  '${GetIt.I<Implementation>().timeValidator()},\n${snapshot.data ?? ''}',
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).textScaleFactor * 40,
                     fontWeight: FontWeight.bold,

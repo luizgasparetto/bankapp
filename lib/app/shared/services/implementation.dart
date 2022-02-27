@@ -4,14 +4,15 @@ import 'package:bankapp/app/shared/repositories/firestore_repository.dart';
 
 import 'dart:developer' as dev;
 
-abstract class IUserRepository {
+abstract class IImplementation {
   signIn(BuildContext context);
   signUp(BuildContext context);
   Future<void> logout(BuildContext context);
   Future<void> deleteAccount(BuildContext context);
+  String timeValidator();
 }
 
-class UserRepository implements IUserRepository {
+class Implementation implements IImplementation {
   @override
   Future<void> logout(BuildContext context) async {
     await GetIt.I<AuthRepository>().signOut();
@@ -68,8 +69,8 @@ class UserRepository implements IUserRepository {
   }
 
   Future<String?> getName() async {
-    final userName = await GetIt.I<FirestoreRepository>().getName() as String?;
-    return userName != null ? userName.split(' ')[0] : '';
+    final userName = await GetIt.I<FirestoreRepository>().getName();
+    return userName.split(' ')[0];
   }
 
   @override
@@ -77,5 +78,20 @@ class UserRepository implements IUserRepository {
     await GetIt.I<FirestoreRepository>().deleteAccount();
     await GetIt.I<AuthRepository>().deleteAccount();
     Navigator.pushReplacementNamed(context, '/welcome');
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Account deleted successfully'),
+    ));
+  }
+
+  @override
+  String timeValidator() {
+    final time = DateTime.now();
+    if (time.hour >= 6 && time.hour <= 12) {
+      return 'Bom dia';
+    } else if (time.hour > 12 && time.hour <= 18) {
+      return 'Boa tarde';
+    } else {
+      return 'Boa noite';
+    }
   }
 }

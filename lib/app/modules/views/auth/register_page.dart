@@ -1,6 +1,6 @@
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/custom_buttom.dart';
-import 'package:bankapp/app/shared/repositories/user_repository.dart';
+import 'package:bankapp/app/shared/services/implementation.dart';
 
 import '../../../shared/repositories/auth_repository.dart';
 
@@ -83,7 +83,7 @@ class RegisterPage extends StatelessWidget {
                 textColor: Colors.white,
                 fontSize: MediaQuery.of(context).textScaleFactor * 18,
                 onPressedFunction: () async =>
-                    await GetIt.I<UserRepository>().signUp(context),
+                    await GetIt.I<Implementation>().signUp(context),
               ),
               SizedBox(height: height * 0.01),
               Row(

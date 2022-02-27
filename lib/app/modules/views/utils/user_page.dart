@@ -2,7 +2,7 @@ import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/custom_buttom.dart';
 import 'package:bankapp/app/modules/widgets/custom_information_tile.dart';
 import 'package:bankapp/app/shared/repositories/firestore_repository.dart';
-import 'package:bankapp/app/shared/repositories/user_repository.dart';
+import 'package:bankapp/app/shared/services/implementation.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -58,7 +58,7 @@ class UserPage extends StatelessWidget {
             Align(
               alignment: Alignment.topCenter,
               child: FutureBuilder<String?>(
-                future: GetIt.I<UserRepository>().getName(),
+                future: GetIt.I<Implementation>().getName(),
                 builder: (context, snapshot) {
                   final name = snapshot.data ?? 'Default';
                   return Container(
@@ -89,21 +89,26 @@ class UserPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(bottom: height * 0.09),
               child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomButton(
-                    text: 'LOGOUT',
-                    color: Theme.of(context).primaryColor,
-                    fontSize: MediaQuery.of(context).textScaleFactor * 18,
-                    textColor: Colors.white,
-                  )),
+                alignment: Alignment.bottomCenter,
+                child: CustomButton(
+                  text: 'LOGOUT',
+                  color: Theme.of(context).primaryColor,
+                  fontSize: MediaQuery.of(context).textScaleFactor * 18,
+                  textColor: Colors.white,
+                  onPressedFunction: () async =>
+                      GetIt.I<Implementation>().logout(context),
+                ),
+              ),
             ),
-            const Align(
+            Align(
               alignment: Alignment.bottomCenter,
               child: CustomButton(
                 text: 'DELETE ACCOUNT',
                 color: Colors.red,
                 fontSize: 18,
                 textColor: Colors.white,
+                onPressedFunction: () async =>
+                    GetIt.I<Implementation>().deleteAccount(context),
               ),
             ),
           ],

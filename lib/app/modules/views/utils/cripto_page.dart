@@ -35,7 +35,7 @@ class CriptoPage extends StatelessWidget {
             child: CustomTextField(
               hintText: 'Search',
               icon: const Icon(AntDesign.search1),
-              onChangedFunction: GetIt.I<CriptoCoinRepository>().onChanged,
+              onChangedFunction: GetIt.I<CriptoCoinRepository>().searchBar,
             ),
           ),
           Container(

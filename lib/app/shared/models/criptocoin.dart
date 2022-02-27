@@ -1,4 +1,5 @@
 import 'package:bankapp/app/core/exports.dart';
+import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
 
 class CriptoCoin extends Equatable {
   final String name;
@@ -22,9 +23,6 @@ class CriptoCoin extends Equatable {
     );
   }
 
-  @override
-  List<Object?> get props => [name, symbol, imgUrl, latestPrice];
-
   CriptoCoin copyWith({
     String? name,
     String? symbol,
@@ -38,4 +36,7 @@ class CriptoCoin extends Equatable {
       latestPrice: latestPrice ?? this.latestPrice,
     );
   }
+
+  @override
+  List<Object?> get props => [name, symbol, imgUrl, latestPrice];
 }

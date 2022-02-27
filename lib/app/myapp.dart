@@ -3,6 +3,7 @@ import 'package:bankapp/app/core/themes.dart';
 import 'package:bankapp/app/modules/views/auth/login_page.dart';
 import 'package:bankapp/app/modules/views/auth/register_page.dart';
 import 'package:bankapp/app/modules/views/utils/cripto_page.dart';
+import 'package:bankapp/app/shared/blocs/creditcards/creditcards_bloc.dart';
 import 'package:bankapp/app/shared/blocs/criptocoin/criptocoin_bloc.dart';
 import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
 import 'package:bankapp/app/shared/services/auth_wrapper.dart';
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => CriptoCoinBloc(CriptoCoinRepository(Client()))
-              ..add(CriptoCoinFetchedEvent()))
+              ..add(CriptoCoinFetchedEvent())),
+        BlocProvider(
+            create: (context) =>
+                CreditCardsBloc()..add(CreditCardsFetchEvent()))
       ],
       child: MaterialApp(
         title: 'BankApp',

@@ -4,7 +4,7 @@ import 'package:bankapp/app/shared/repositories/auth_repository.dart';
 
 import 'dart:developer' as dev;
 
-import 'package:bankapp/app/shared/repositories/user_repository.dart';
+import 'package:bankapp/app/shared/services/implementation.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -80,7 +80,7 @@ class LoginPage extends StatelessWidget {
                 textColor: Colors.white,
                 fontSize: 18,
                 onPressedFunction: () async =>
-                    await GetIt.I<UserRepository>().signIn(context),
+                    await GetIt.I<Implementation>().signIn(context),
               ),
               SizedBox(height: height * 0.01),
               Row(

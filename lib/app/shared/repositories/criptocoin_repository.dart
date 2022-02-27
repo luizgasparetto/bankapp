@@ -11,7 +11,8 @@ abstract class ICriptoCoinRepository {
   String setCurrentQuantity(double quantity);
   void setDefaultQuantity();
   void setCriptoCoinList(List<CriptoCoin> list);
-  void onChanged(String value);
+  void searchBar(String value);
+  String quantityXPrice(String value);
 }
 
 class CriptoCoinRepository extends ChangeNotifier
@@ -40,6 +41,23 @@ class CriptoCoinRepository extends ChangeNotifier
   }
 
   @override
+  String quantityXPrice(String value) {
+    return (GetIt.I<CriptoCoinRepository>().currentQuantity /
+            double.parse(value))
+        .toString();
+  }
+
+  @override
+  void searchBar(String value) {
+    List<CriptoCoin> coinList = criptoCoinList.where((element) {
+      return element.toString().toLowerCase().contains(value.toLowerCase());
+    }).toList();
+
+    criptoCoinList = coinList;
+    notifyListeners();
+  }
+
+  @override
   void setDefaultQuantity() {
     currentQuantity = 0;
     notifyListeners();
@@ -48,16 +66,6 @@ class CriptoCoinRepository extends ChangeNotifier
   @override
   void setCriptoCoinList(List<CriptoCoin> list) {
     criptoCoinList = list;
-    notifyListeners();
-  }
-
-  @override
-  void onChanged(String value) {
-    List<CriptoCoin> coinList = criptoCoinList.where((element) {
-      return element.toString().toLowerCase().contains(value.toLowerCase());
-    }).toList();
-
-    criptoCoinList = coinList;
     notifyListeners();
   }
 }

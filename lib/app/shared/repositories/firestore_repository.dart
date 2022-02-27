@@ -9,6 +9,7 @@ abstract class IFirestoreRepository {
   Future<void> saveUser(String fullName, String email);
   Future<String> getName();
   Future<void> deleteAccount();
+  Future<void> getCreditCards();
 }
 
 class FirestoreRepository extends ChangeNotifier
@@ -76,5 +77,15 @@ class FirestoreRepository extends ChangeNotifier
       }
     });
     notifyListeners();
+  }
+
+  @override
+  Future<List> getCreditCards() async {
+    final user = await _db
+        .collection('users/${_auth.authUser!.uid}/informations')
+        .doc('profile')
+        .get();
+
+    return user.get('creditCards') ?? [];
   }
 }

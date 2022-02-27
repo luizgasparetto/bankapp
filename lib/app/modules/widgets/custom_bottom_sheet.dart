@@ -18,7 +18,6 @@ class CustomBottomSheet extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            //margin: EdgeInsets.only(top: height * 0.01),
             height: height * 0.15,
             child: Image.network(coin.imgUrl),
           ),
@@ -42,11 +41,9 @@ class CustomBottomSheet extends StatelessWidget {
                     .setCurrentQuantity(double.parse(value))
                 : GetIt.I<CriptoCoinRepository>().setCurrentQuantity(0),
           ),
-          SizedBox(height: height * 0.01),
+          SizedBox(height: height * 0.03),
           Text(
-            (GetIt.I<CriptoCoinRepository>().currentQuantity /
-                    double.parse(coin.latestPrice))
-                .toString(),
+            (GetIt.I<CriptoCoinRepository>().quantityXPrice(coin.latestPrice)),
             style: GoogleFonts.lato(color: Colors.green),
           ),
           const Spacer(),
