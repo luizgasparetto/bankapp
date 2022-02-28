@@ -100,17 +100,17 @@ class UserPage extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: CustomButton(
-                text: 'DELETE ACCOUNT',
-                color: Colors.red,
-                fontSize: 18,
-                textColor: Colors.white,
-                onPressedFunction: () async =>
-                    GetIt.I<Implementation>().deleteAccount(context),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: CustomButton(
+            //     text: 'DELETE ACCOUNT',
+            //     color: Colors.red,
+            //     fontSize: 18,
+            //     textColor: Colors.white,
+            //     onPressedFunction: () async =>
+            //         GetIt.I<Implementation>().deleteAccount(context),
+            //   ),
+            // ),
           ],
         ),
       ),

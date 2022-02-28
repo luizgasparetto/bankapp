@@ -1,9 +1,11 @@
 import 'package:bankapp/app/core/exports.dart';
+import 'package:bankapp/app/shared/blocs/creditcards/creditcards_bloc.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
 
 import 'dart:developer' as dev;
 
 import 'package:bankapp/app/shared/services/implementation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final implementation = GetIt.I<Implementation>();
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -33,10 +36,10 @@ class HomePage extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: height * 0.035, right: height * 0.03),
             child: FutureBuilder<String?>(
-              future: GetIt.I<Implementation>().getName(),
+              future: implementation.getName(),
               builder: (context, snapshot) {
                 return Text(
-                  '${GetIt.I<Implementation>().timeValidator()},\n${snapshot.data ?? ''}',
+                  '${implementation.timeValidator()},\n${snapshot.data ?? ''}',
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).textScaleFactor * 40,
                     fontWeight: FontWeight.bold,
@@ -77,7 +80,12 @@ class HomePage extends StatelessWidget {
                   ActionCard(
                     icon: Icons.payment,
                     text: 'Meus\nCartões',
-                    onTap: () => Navigator.pushNamed(context, '/cards'),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/cards');
+                      BlocProvider.of<CreditCardsBloc>(context).add(
+                        CreditCardsFetchEvent(),
+                      );
+                    },
                   ),
                   ActionCard(
                     icon: MaterialCommunityIcons.ethereum,
@@ -87,7 +95,7 @@ class HomePage extends StatelessWidget {
                   ActionCard(
                     icon: Icons.receipt,
                     text: 'Consultar\nExtrato',
-                    onTap: () => Navigator.pushNamed(context, '/extract'),
+                    onTap: () => Navigator.pushNamed(context, '/statement'),
                   ),
                   ActionCard(
                     icon: MaterialCommunityIcons.currency_usd,

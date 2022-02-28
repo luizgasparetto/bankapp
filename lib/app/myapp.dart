@@ -3,6 +3,7 @@ import 'package:bankapp/app/core/themes.dart';
 import 'package:bankapp/app/modules/views/auth/login_page.dart';
 import 'package:bankapp/app/modules/views/auth/register_page.dart';
 import 'package:bankapp/app/modules/views/utils/cripto_page.dart';
+import 'package:bankapp/app/modules/views/utils/register_card_page.dart';
 import 'package:bankapp/app/shared/blocs/creditcards/creditcards_bloc.dart';
 import 'package:bankapp/app/shared/blocs/criptocoin/criptocoin_bloc.dart';
 import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
@@ -34,13 +35,14 @@ class MyApp extends StatelessWidget {
           '/home': (_) => const HomePage(),
           '/pix': (_) => const PixPage(),
           '/user': (_) => const UserPage(),
-          '/extract': (_) => const ExtractPage(),
+          '/statement': (_) => const StatementPage(),
           '/deposit': (_) => const DepositPage(),
           '/cards': (_) => const CardsPage(),
           '/cripto': (_) => const CriptoPage(),
           '/login': (_) => const LoginPage(),
           '/register': (_) => const RegisterPage(),
           '/welcome': (_) => const WelcomePage(),
+          '/registerCard': (_) => const RegisterCardPage(),
         },
       ),
     );

@@ -2,6 +2,7 @@
 
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
+import 'package:bankapp/app/shared/repositories/credit_card_repository.dart';
 import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
 import 'package:bankapp/app/shared/repositories/firestore_repository.dart';
 import 'package:bankapp/app/shared/services/auth_wrapper.dart';
@@ -26,6 +27,11 @@ class Registery implements IRegistery {
       CriptoCoinRepository(Client()),
     );
     GetIt.I.registerSingleton(FirestoreRepository(GetIt.I<AuthRepository>()));
-    GetIt.I.registerSingleton<Implementation>(Implementation());
+    GetIt.I.registerSingleton(CreditCardRepository(GetIt.I<AuthRepository>()));
+    GetIt.I.registerSingleton<Implementation>(Implementation(
+      authRepository: GetIt.I<AuthRepository>(),
+      firestoreRepository: GetIt.I<FirestoreRepository>(),
+      creditCardRepository: GetIt.I<CreditCardRepository>(),
+    ));
   }
 }

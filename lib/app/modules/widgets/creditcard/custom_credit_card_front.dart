@@ -2,7 +2,16 @@ import 'package:bankapp/app/core/exports.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomCreditCardFront extends StatelessWidget {
-  const CustomCreditCardFront({Key? key}) : super(key: key);
+  final String cardName;
+  final String cardNumber;
+  final String expirationDate;
+
+  const CustomCreditCardFront({
+    Key? key,
+    required this.cardName,
+    required this.cardNumber,
+    required this.expirationDate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +32,7 @@ class CustomCreditCardFront extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                '5032 9334 3764 9846',
+                cardNumber,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).textScaleFactor * 20,
@@ -44,12 +53,11 @@ class CustomCreditCardFront extends StatelessWidget {
             ),
           ),
           Container(
-            margin:
-                EdgeInsets.only(right: width * 0.23, bottom: height * 0.035),
+            margin: EdgeInsets.only(left: width * 0.09, bottom: height * 0.035),
             child: Align(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.bottomLeft,
               child: Text(
-                'LUIZ E. GASPARETTO',
+                cardName.toUpperCase(),
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: Colors.white,
@@ -64,7 +72,7 @@ class CustomCreditCardFront extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Text(
-                '29/10',
+                expirationDate,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).textScaleFactor * 14,

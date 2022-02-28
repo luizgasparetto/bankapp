@@ -1,7 +1,10 @@
 import 'package:bankapp/app/core/exports.dart';
 
 class CustomCreditCardBack extends StatelessWidget {
-  const CustomCreditCardBack({Key? key}) : super(key: key);
+  final String cvvCode;
+
+  const CustomCreditCardBack({Key? key, required this.cvvCode})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class CustomCreditCardBack extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  '767',
+                  cvvCode,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: MediaQuery.of(context).textScaleFactor * 16,

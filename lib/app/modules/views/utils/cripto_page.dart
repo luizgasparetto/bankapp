@@ -1,5 +1,5 @@
 import 'package:bankapp/app/core/exports.dart';
-import 'package:bankapp/app/modules/widgets/custom_bottom_sheet.dart';
+import 'package:bankapp/app/modules/widgets/custom_cripto_bottom_sheet.dart';
 import 'package:bankapp/app/modules/widgets/shimmer/skeleton_list_view.dart';
 import 'package:bankapp/app/shared/blocs/criptocoin/criptocoin_bloc.dart';
 import 'package:bankapp/app/shared/services/formatter.dart';
@@ -80,7 +80,9 @@ class CriptoPage extends StatelessWidget {
                             ),
                             context: context,
                             builder: (context) {
-                              return CustomBottomSheet(coin: coinList[index]);
+                              return CustomCriptoBottomSheet(
+                                coin: coinList[index],
+                              );
                             },
                           );
                         },

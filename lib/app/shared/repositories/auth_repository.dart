@@ -13,8 +13,9 @@ abstract class IAuthRepository {
   Future<void> signIn();
   Future<void> signUp();
   Future<void> signOut();
+  Future<void> resetPassword();
   _getUser();
-  resetPasswordAndEmail();
+  resetPasswordAndEmailFields();
   deleteAccount();
 }
 
@@ -79,6 +80,15 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
   }
 
   @override
+  Future<void> resetPassword() async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException {
+      throw AuthException(message: 'Falha ao enviar o email');
+    }
+  }
+
+  @override
   _getUser() {
     authUser = _auth.currentUser;
     notifyListeners();
@@ -100,7 +110,7 @@ class AuthRepository extends ChangeNotifier implements IAuthRepository {
   }
 
   @override
-  resetPasswordAndEmail() {
+  resetPasswordAndEmailFields() {
     email = '';
     password = '';
     notifyListeners();

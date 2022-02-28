@@ -1,4 +1,5 @@
 import 'package:bankapp/app/core/exports.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -7,6 +8,8 @@ class CustomTextField extends StatelessWidget {
   final Icon icon;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     Key? key,
@@ -16,6 +19,8 @@ class CustomTextField extends StatelessWidget {
     required this.icon,
     this.controller,
     this.keyboardType,
+    this.maxLength,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -34,6 +39,8 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       onChanged: onChangedFunction ?? (String text) {},
       keyboardType: keyboardType ?? TextInputType.text,
+      maxLength: maxLength,
+      inputFormatters: inputFormatters,
     );
   }
 }

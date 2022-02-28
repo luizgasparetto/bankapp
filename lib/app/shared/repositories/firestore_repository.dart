@@ -1,4 +1,5 @@
 import 'package:bankapp/app/core/exports.dart';
+import 'package:bankapp/app/shared/models/extract.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
 import 'package:bankapp/app/shared/services/firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +11,7 @@ abstract class IFirestoreRepository {
   Future<String> getName();
   Future<void> deleteAccount();
   Future<void> getCreditCards();
+  Future<void> registerCreditCard(CreditCard card);
 }
 
 class FirestoreRepository extends ChangeNotifier
@@ -32,6 +34,7 @@ class FirestoreRepository extends ChangeNotifier
           'fullName': fullName,
           'email': email,
           'creditCards': <CreditCard>[],
+          'statement': <Statement>[],
         },
       );
     } catch (e) {
@@ -87,5 +90,15 @@ class FirestoreRepository extends ChangeNotifier
         .get();
 
     return user.get('creditCards') ?? [];
+  }
+
+  @override
+  Future<void> registerCreditCard(dynamic card) async {
+    await _db
+        .collection('users/${_auth.authUser!.uid}/informations')
+        .doc('profile')
+        .update({
+      'creditCards': FieldValue.arrayUnion(card),
+    });
   }
 }

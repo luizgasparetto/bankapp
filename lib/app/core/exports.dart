@@ -4,7 +4,7 @@ export 'package:flutter/material.dart';
 export 'package:flutter_vector_icons/flutter_vector_icons.dart';
 export 'package:bankapp/app/modules/views/utils/cards_page.dart';
 export 'package:bankapp/app/modules/views/utils/deposit_page.dart';
-export 'package:bankapp/app/modules/views/utils/extract_page.dart';
+export 'package:bankapp/app/modules/views/utils/statement_page.dart';
 export 'package:bankapp/app/modules/views/utils/user_page.dart';
 export 'package:equatable/equatable.dart';
 export 'package:bankapp/app/shared/models/credit_card.dart';

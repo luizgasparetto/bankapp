@@ -1,20 +1,20 @@
 import 'package:bankapp/app/core/exports.dart';
 
-class Extract extends Equatable {
+class Statement extends Equatable {
   final String purchaseTitle;
   final String purchaseDescription;
   final double purchaseValue;
   final String purchaseDate;
 
-  const Extract({
+  const Statement({
     required this.purchaseTitle,
     required this.purchaseDescription,
     required this.purchaseValue,
     required this.purchaseDate,
   });
 
-  factory Extract.fromMap(Map<String, dynamic> map) {
-    return Extract(
+  factory Statement.fromMap(Map<String, dynamic> map) {
+    return Statement(
       purchaseTitle: map['purchaseTitle'] ?? '',
       purchaseDescription: map['purchaseDescription'] ?? '',
       purchaseValue: map['purchaseValue']?.toDouble() ?? 0.0,
@@ -22,13 +22,13 @@ class Extract extends Equatable {
     );
   }
 
-  Extract copyWith({
+  Statement copyWith({
     String? purchaseTitle,
     String? purchaseDescription,
     double? purchaseValue,
     String? purchaseDate,
   }) {
-    return Extract(
+    return Statement(
       purchaseTitle: purchaseTitle ?? this.purchaseTitle,
       purchaseDescription: purchaseDescription ?? this.purchaseDescription,
       purchaseValue: purchaseValue ?? this.purchaseValue,
@@ -37,5 +37,6 @@ class Extract extends Equatable {
   }
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props =>
+      [purchaseTitle, purchaseDescription, purchaseValue, purchaseDate];
 }

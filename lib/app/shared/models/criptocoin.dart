@@ -1,5 +1,4 @@
 import 'package:bankapp/app/core/exports.dart';
-import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
 
 class CriptoCoin extends Equatable {
   final String name;

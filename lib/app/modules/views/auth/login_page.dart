@@ -1,8 +1,7 @@
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/custom_buttom.dart';
+import 'package:bankapp/app/modules/widgets/custom_password_bottom_sheet.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
-
-import 'dart:developer' as dev;
 
 import 'package:bankapp/app/shared/services/implementation.dart';
 
@@ -68,8 +67,16 @@ class LoginPage extends StatelessWidget {
                 child: TextButton(
                   child: const Text('Forgot your password?'),
                   onPressed: () {
-                    final currentUser = GetIt.I<AuthRepository>().authUser;
-                    dev.log(currentUser.toString());
+                    showModalBottomSheet(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                      ),
+                      builder: (context) => const CustomPasswordBottomSheet(),
+                    );
                   },
                 ),
               ),

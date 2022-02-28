@@ -4,10 +4,11 @@ import 'package:bankapp/app/shared/models/criptocoin.dart';
 import 'package:bankapp/app/shared/repositories/criptocoin_repository.dart';
 import 'package:bankapp/app/shared/services/formatter.dart';
 
-class CustomBottomSheet extends StatelessWidget {
+class CustomCriptoBottomSheet extends StatelessWidget {
   final CriptoCoin coin;
 
-  const CustomBottomSheet({Key? key, required this.coin}) : super(key: key);
+  const CustomCriptoBottomSheet({Key? key, required this.coin})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
