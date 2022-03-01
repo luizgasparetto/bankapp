@@ -44,7 +44,10 @@ class RegisterCardPage extends StatelessWidget {
                 hintText: 'Luiz E. Gasparetto',
                 icon: const Icon(AntDesign.user),
                 maxLength: 30,
-                onChangedFunction: creditCardRepository.updateCardName,
+                onChangedFunction: (value) {
+                  creditCardRepository.updateFields(
+                      cardName: true, value: value);
+                },
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 8, bottom: 4),
@@ -61,7 +64,10 @@ class RegisterCardPage extends StatelessWidget {
                   CustomInputFormatter(quantity: 4, separator: ' '),
                 ],
                 keyboardType: TextInputType.number,
-                onChangedFunction: creditCardRepository.updateCardNumber,
+                onChangedFunction: (value) {
+                  creditCardRepository.updateFields(
+                      cardNumber: true, value: value);
+                },
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 8, bottom: 4),
@@ -79,7 +85,10 @@ class RegisterCardPage extends StatelessWidget {
                   CustomInputFormatter(quantity: 2, separator: '/'),
                 ],
                 keyboardType: TextInputType.number,
-                onChangedFunction: creditCardRepository.updateExpirationDate,
+                onChangedFunction: (value) {
+                  creditCardRepository.updateFields(
+                      expirationDate: true, value: value);
+                },
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 8, bottom: 4),
@@ -94,7 +103,10 @@ class RegisterCardPage extends StatelessWidget {
                 maxLength: 3,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 keyboardType: TextInputType.number,
-                onChangedFunction: creditCardRepository.updateCvvNumber,
+                onChangedFunction: (value) {
+                  creditCardRepository.updateFields(
+                      cvvNumber: true, value: value);
+                },
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.03),
               CustomButton(

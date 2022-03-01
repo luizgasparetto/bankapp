@@ -7,6 +7,14 @@ import 'dart:developer' as dev;
 
 abstract class ICreditCardRepository {
   Future<void> registerCreditCard(dynamic card);
+  Future<void> deleteCreditCard(dynamic card);
+  void updateFields({
+    bool cardNumber,
+    bool cardName,
+    bool expirationDate,
+    bool cvvNumber,
+    required String value,
+  });
 }
 
 class CreditCardRepository extends ChangeNotifier
@@ -36,24 +44,45 @@ class CreditCardRepository extends ChangeNotifier
     }
   }
 
-  void updateCardNumber(String value) {
-    cardNumber = value;
-    notifyListeners();
+  @override
+  Future<void> deleteCreditCard(card) async {
+    try {
+      await _db
+          .collection('users/${_auth.authUser!.uid}/informations')
+          .doc('profile')
+          .update({
+        'creditCards': FieldValue.arrayRemove([card]),
+      });
+    } catch (e) {
+      throw AuthException(message: 'Não possível deletar o cartão');
+    }
   }
 
-  void updateExpirationDate(String value) {
-    expirationDate = value;
-    notifyListeners();
-  }
-
-  void updateCardName(String value) {
-    cardName = value;
-    notifyListeners();
-  }
-
-  void updateCvvNumber(String value) {
-    cvvNumber = value;
-    notifyListeners();
+  @override
+  void updateFields({
+    bool cardNumber = false,
+    bool cardName = false,
+    bool expirationDate = false,
+    bool cvvNumber = false,
+    required String value,
+  }) {
+    if (cardNumber) {
+      this.cardNumber = value;
+      notifyListeners();
+      return;
+    } else if (cardName) {
+      this.cardName = value;
+      notifyListeners();
+      return;
+    } else if (expirationDate) {
+      this.expirationDate = value;
+      notifyListeners();
+      return;
+    } else if (cvvNumber) {
+      this.cvvNumber = value;
+      notifyListeners();
+      return;
+    }
   }
 
   void resetFields() {

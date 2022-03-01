@@ -1,8 +1,6 @@
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/blocs/creditcards/creditcards_bloc.dart';
-import 'package:bankapp/app/shared/repositories/auth_repository.dart';
-
-import 'dart:developer' as dev;
+import 'package:bankapp/app/shared/repositories/credit_card_repository.dart';
 
 import 'package:bankapp/app/shared/services/implementation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,7 +54,10 @@ class HomePage extends StatelessWidget {
               subtitle: 'R\$ 2.248,55',
               key: const Key('saldoTile'),
               onPressedFunction: () {
-                dev.log(GetIt.I<AuthRepository>().authUser.toString());
+                GetIt.I<CreditCardRepository>().updateFields(
+                  value: '',
+                  cardName: true,
+                );
               },
             ),
           ),

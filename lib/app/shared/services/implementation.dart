@@ -16,6 +16,7 @@ abstract class IImplementation {
   Future<void> resetPassword(BuildContext context);
   String timeValidator();
   Future<void> registerCreditCard(BuildContext context);
+  Future<void> deleteCreditCard(BuildContext context, dynamic card);
 }
 
 class Implementation implements IImplementation {
@@ -160,6 +161,22 @@ class Implementation implements IImplementation {
       }
     } else {
       dev.log('PREENCHE TUDO KRL');
+    }
+  }
+
+  @override
+  Future<void> deleteCreditCard(BuildContext context, dynamic card) async {
+    try {
+      await creditCardRepository.deleteCreditCard(card);
+      BlocProvider.of<CreditCardsBloc>(context).add(CreditCardsFetchEvent());
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Cartão removido com sucesso')));
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        e.message,
+      )));
     }
   }
 }

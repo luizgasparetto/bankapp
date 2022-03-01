@@ -4,10 +4,9 @@ import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/modules/widgets/creditcard/custom_credit_card_back.dart';
 import 'package:bankapp/app/modules/widgets/creditcard/custom_credit_card_front.dart';
 import 'package:bankapp/app/shared/blocs/creditcards/creditcards_bloc.dart';
+import 'package:bankapp/app/shared/services/implementation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flip_card/flip_card.dart';
-
-import 'dart:developer' as dev;
 
 class CardsPage extends StatelessWidget {
   const CardsPage({Key? key}) : super(key: key);
@@ -49,8 +48,6 @@ class CardsPage extends StatelessWidget {
                           Container(
                             margin: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height * 0.25,
-                              //left: MediaQuery.of(context).size.width * ,
-                              //right: MediaQuery.of(context).size.width * 0.1,
                             ),
                             height: MediaQuery.of(context).size.height * 0.2,
                             child: Lottie.asset(
@@ -58,61 +55,54 @@ class CardsPage extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     Container(
-                          //       margin: EdgeInsets.only(
-                          //         top:
-                          //             MediaQuery.of(context).size.height * 0.52,
-                          //         //right: MediaQuery.of(context).size.width * 0.1,
-                          //       ),
-                          //       child: Text(
-                          //         "Don't have a card yet? Register one right now!",
-                          //         textAlign: TextAlign.center,
-                          //         style: GoogleFonts.lato(
-                          //           color: Colors.grey.shade600,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // )
                         ],
                       );
                     } else {
                       final cardList = state.creditCards;
-                      return RefreshIndicator(
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: cardList.length,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              child: FlipCard(
-                                fill: Fill.fillBack,
-                                direction: FlipDirection.HORIZONTAL,
-                                front: CustomCreditCardFront(
-                                  cardName: cardList[index]['cardName'],
-                                  cardNumber: cardList[index]['cardNumber'],
-                                  expirationDate: cardList[index]
-                                      ['expirationDate'],
-                                ),
-                                back: CustomCreditCardBack(
-                                  cvvCode: cardList[index]['cvvCode'],
-                                ),
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        itemCount: cardList.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            child: FlipCard(
+                              fill: Fill.fillBack,
+                              direction: FlipDirection.HORIZONTAL,
+                              front: CustomCreditCardFront(
+                                cardName: cardList[index]['cardName'],
+                                cardNumber: cardList[index]['cardNumber'],
+                                expirationDate: cardList[index]
+                                    ['expirationDate'],
                               ),
-                              onLongPress: () => dev.log('LONGPRESS'),
-                            );
-                          },
-                          separatorBuilder: (_, __) => const Divider(),
-                        ),
-                        onRefresh: () async {
-                          return Future.delayed(const Duration(seconds: 1))
-                              .then(
-                            (_) => dev.log('refresh'),
+                              back: CustomCreditCardBack(
+                                cvvCode: cardList[index]['cvvCode'],
+                              ),
+                            ),
+                            onLongPress: () => showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return ListTile(
+                                  leading: const Icon(
+                                    MaterialCommunityIcons.trash_can_outline,
+                                    color: Colors.red,
+                                  ),
+                                  title: Text(
+                                    'Delete this credit card',
+                                    style: GoogleFonts.lato(color: Colors.red),
+                                  ),
+                                  onTap: () async {
+                                    await GetIt.I<Implementation>()
+                                        .deleteCreditCard(
+                                      context,
+                                      cardList[index],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           );
                         },
+                        separatorBuilder: (_, __) => const Divider(),
                       );
-                      //return const Center(child: Text('TEM CARTÃO'));
                     }
                   } else {
                     return const Center(child: Text('ERROR'));

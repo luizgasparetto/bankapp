@@ -44,7 +44,7 @@ class CustomPasswordBottomSheet extends StatelessWidget {
           CustomButton(
             text: 'Send the email',
             color: Theme.of(context).primaryColor,
-            fontSize: 20,
+            fontSize: 18,
             textColor: Colors.white,
             onPressedFunction: () async {
               await GetIt.I<Implementation>().resetPassword(context);
