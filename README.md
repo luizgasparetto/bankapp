@@ -6,5 +6,5 @@
 <h4>The application is not yet finalized, I'm still implementing the functions to edit the user profile, extract, etc..</h4>
 </br>
 <p align="center">
-<img alt='BankAppOverview' src="https://prnt.sc/oozLZGNkBMUU">
+<img alt='BankAppOverview' src="./assets/project/background2.png">
 </p>
