@@ -17,21 +17,23 @@ abstract class IRegistery {
 class Registery implements IRegistery {
   @override
   static void setUp() {
-    GetIt.I.registerSingleton<AuthRepository>(
+    final getIt = GetIt.instance;
+
+    getIt.registerSingleton<AuthRepository>(
       AuthRepository(FirebaseAuth.instance),
     );
-    GetIt.I.registerSingleton<AuthWrapper>(
-      AuthWrapper(GetIt.I<AuthRepository>()),
+    getIt.registerSingleton<AuthWrapper>(
+      AuthWrapper(getIt()),
     );
-    GetIt.I.registerSingleton<CriptoCoinRepository>(
+    getIt.registerSingleton<CriptoCoinRepository>(
       CriptoCoinRepository(Client()),
     );
-    GetIt.I.registerSingleton(FirestoreRepository(GetIt.I<AuthRepository>()));
-    GetIt.I.registerSingleton(CreditCardRepository(GetIt.I<AuthRepository>()));
-    GetIt.I.registerSingleton<Implementation>(Implementation(
-      authRepository: GetIt.I<AuthRepository>(),
-      firestoreRepository: GetIt.I<FirestoreRepository>(),
-      creditCardRepository: GetIt.I<CreditCardRepository>(),
+    getIt.registerSingleton(FirestoreRepository(getIt()));
+    getIt.registerSingleton(CreditCardRepository(getIt()));
+    getIt.registerSingleton<Implementation>(Implementation(
+      authRepository: getIt(),
+      firestoreRepository: getIt(),
+      creditCardRepository: getIt(),
     ));
   }
 }

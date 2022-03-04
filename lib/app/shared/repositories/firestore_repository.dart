@@ -1,4 +1,5 @@
 import 'package:bankapp/app/core/exports.dart';
+import 'package:bankapp/app/shared/models/criptocoin.dart';
 import 'package:bankapp/app/shared/models/extract.dart';
 import 'package:bankapp/app/shared/repositories/auth_repository.dart';
 import 'package:bankapp/app/shared/services/firestore.dart';
@@ -12,6 +13,7 @@ abstract class IFirestoreRepository {
   Future<void> deleteAccount();
   Future<void> getCreditCards();
   Future<void> registerCreditCard(CreditCard card);
+  Future<void> getUser();
 }
 
 class FirestoreRepository extends ChangeNotifier
@@ -35,6 +37,9 @@ class FirestoreRepository extends ChangeNotifier
           'email': email,
           'creditCards': <CreditCard>[],
           'statement': <Statement>[],
+          'balance': 0.00,
+          'toPay': 0.00,
+          'favoriteCoins': <CriptoCoin>[],
         },
       );
     } catch (e) {
@@ -100,5 +105,13 @@ class FirestoreRepository extends ChangeNotifier
         .update({
       'creditCards': FieldValue.arrayUnion(card),
     });
+  }
+
+  @override
+  Future<DocumentSnapshot<Map>> getUser() async {
+    return await _db
+        .collection('users/${_auth.authUser!.uid}/informations')
+        .doc('profile')
+        .get();
   }
 }

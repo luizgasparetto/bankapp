@@ -4,14 +4,16 @@ class CustomListTile extends StatelessWidget {
   const CustomListTile({
     Key? key,
     required this.title,
-    required this.subtitle,
+    this.subtitle,
+    this.subtitleText = '',
     this.onPressedFunction,
     //required this.height,
   }) : super(key: key);
 
   //final double height;
   final String title;
-  final String subtitle;
+  final Widget? subtitle;
+  final String subtitleText;
   final Function()? onPressedFunction;
 
   @override
@@ -29,10 +31,11 @@ class CustomListTile extends StatelessWidget {
             title,
             style: Theme.of(context).textTheme.bodyText2,
           ),
-          subtitle: Text(
-            subtitle,
-            style: TextStyle(fontSize: height * 0.028, color: Colors.black),
-          ),
+          subtitle: subtitle ??
+              Text(
+                subtitleText,
+                style: TextStyle(fontSize: height * 0.028, color: Colors.black),
+              ),
           trailing: Icon(
             Icons.arrow_forward_ios,
             color: Theme.of(context).primaryColor,

@@ -1,6 +1,7 @@
 import 'package:bankapp/app/core/exports.dart';
 import 'package:bankapp/app/shared/blocs/creditcards/creditcards_bloc.dart';
 import 'package:bankapp/app/shared/repositories/credit_card_repository.dart';
+import 'package:bankapp/app/shared/services/formatter.dart';
 
 import 'package:bankapp/app/shared/services/implementation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +52,21 @@ class HomePage extends StatelessWidget {
             margin: EdgeInsets.only(left: height * 0.03, right: height * 0.03),
             child: CustomListTile(
               title: 'Saldo em Conta',
-              subtitle: 'R\$ 2.248,55',
+              subtitle: FutureBuilder(
+                future: implementation.getData('balance'),
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      Formatter.numberFormat(double.parse(
+                        snapshot.data.toString(),
+                      )),
+                      style: TextStyle(
+                          fontSize: height * 0.028, color: Colors.black),
+                    );
+                  }
+                  return const Text('');
+                }),
+              ),
               key: const Key('saldoTile'),
               onPressedFunction: () {
                 GetIt.I<CreditCardRepository>().updateFields(
@@ -64,10 +79,24 @@ class HomePage extends StatelessWidget {
           SizedBox(height: height * 0.02),
           Container(
             margin: EdgeInsets.only(left: height * 0.03, right: height * 0.03),
-            child: const CustomListTile(
+            child: CustomListTile(
               title: 'Para pagar',
-              subtitle: 'R\$ 869,50',
-              key: Key('toPayTile'),
+              subtitle: FutureBuilder(
+                future: implementation.getData('toPay'),
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      Formatter.numberFormat(double.parse(
+                        snapshot.data.toString(),
+                      )),
+                      style: TextStyle(
+                          fontSize: height * 0.028, color: Colors.black),
+                    );
+                  }
+                  return const Text('');
+                }),
+              ),
+              key: const Key('toPayTile'),
             ),
           ),
           SizedBox(height: height * 0.11),
@@ -93,16 +122,16 @@ class HomePage extends StatelessWidget {
                     text: 'Cripto\nStore',
                     onTap: () => Navigator.pushNamed(context, '/cripto'),
                   ),
-                  ActionCard(
-                    icon: Icons.receipt,
-                    text: 'Consultar\nExtrato',
-                    onTap: () => Navigator.pushNamed(context, '/statement'),
-                  ),
-                  ActionCard(
-                    icon: MaterialCommunityIcons.currency_usd,
-                    text: 'Depositar\ndinheiro aqui',
-                    onTap: () => Navigator.pushNamed(context, '/deposit'),
-                  ),
+                  // ActionCard(
+                  //   icon: Icons.receipt,
+                  //   text: 'Consultar\nExtrato',
+                  //   onTap: () => Navigator.pushNamed(context, '/statement'),
+                  // ),
+                  // ActionCard(
+                  //   icon: MaterialCommunityIcons.currency_usd,
+                  //   text: 'Depositar\ndinheiro aqui',
+                  //   onTap: () => Navigator.pushNamed(context, '/deposit'),
+                  // ),
                 ],
               ),
             ),

@@ -86,18 +86,15 @@ class UserPage extends StatelessWidget {
               futureFunction: GetIt.I<FirestoreRepository>().getEmail(),
               onPressedLeadingIcon: () {},
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: height * 0.09),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: CustomButton(
-                  text: 'LOGOUT',
-                  color: Theme.of(context).primaryColor,
-                  fontSize: MediaQuery.of(context).textScaleFactor * 18,
-                  textColor: Colors.white,
-                  onPressedFunction: () async =>
-                      GetIt.I<Implementation>().logout(context),
-                ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomButton(
+                text: 'LOGOUT',
+                color: Theme.of(context).primaryColor,
+                fontSize: MediaQuery.of(context).textScaleFactor * 18,
+                textColor: Colors.white,
+                onPressedFunction: () async =>
+                    GetIt.I<Implementation>().logout(context),
               ),
             ),
             // Align(

@@ -17,6 +17,7 @@ abstract class IImplementation {
   String timeValidator();
   Future<void> registerCreditCard(BuildContext context);
   Future<void> deleteCreditCard(BuildContext context, dynamic card);
+  Future<double> getData(String data);
 }
 
 class Implementation implements IImplementation {
@@ -102,7 +103,7 @@ class Implementation implements IImplementation {
     final time = DateTime.now();
     if (time.hour >= 6 && time.hour <= 12) {
       return 'Bom dia';
-    } else if (time.hour > 12 && time.hour <= 18) {
+    } else if (time.hour > 12 && time.hour <= 19) {
       return 'Boa tarde';
     } else {
       return 'Boa noite';
@@ -178,5 +179,11 @@ class Implementation implements IImplementation {
         e.message,
       )));
     }
+  }
+
+  @override
+  Future<double> getData(String data) async {
+    final user = await firestoreRepository.getUser();
+    return user[data];
   }
 }
